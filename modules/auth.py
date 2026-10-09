@@ -69,8 +69,8 @@ def login_page():
         st.session_state.remember_me = remember
         st.success("Logged in.")
         st.rerun()
-        
-        with st.expander("Forgot password?"):
+            
+    with st.expander("Forgot password?"):
         st.write("Reset your password using your registered email.")
         if st.button("Reset Password", key="open_password_reset"):
             st.query_params["page"] = "reset"
