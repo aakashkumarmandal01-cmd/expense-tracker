@@ -3,10 +3,16 @@ import sqlite3
 from contextlib import contextmanager
 from pathlib import Path
 from dotenv import load_dotenv
+import streamlit as st
 
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL", "").strip()
+try:
+    DATABASE_URL = str(
+        st.secrets.get("DATABASE_URL", "")
+    ).strip()
+except Exception:
+    DATABASE_URL = os.getenv("DATABASE_URL", "").strip()
 IS_POSTGRES = DATABASE_URL.startswith(("postgresql://", "postgres://"))
 
 if IS_POSTGRES:
