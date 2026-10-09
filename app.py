@@ -1,6 +1,6 @@
 import streamlit as st
 from database.database import init_db
-from modules.auth import login_page, register_page, logout
+from modules.auth import login_page, register_page, logout, render_password_reset_page
 from modules.dashboard import render_dashboard
 from modules.transactions import render_add_expense, render_add_income, render_transactions
 from modules.analytics import render_analytics
@@ -15,6 +15,12 @@ from modules.onboarding import render_onboarding
 st.set_page_config(page_title="College Expense Tracker", page_icon="🎓", layout="wide")
 
 init_db()
+
+# A reset link opens this public route before normal login/session checks.
+reset_token = st.query_params.get("reset_token", "")
+if reset_token:
+    render_password_reset_page(reset_token)
+    st.stop()
 
 if "user_id" not in st.session_state:
     st.session_state.user_id = None
