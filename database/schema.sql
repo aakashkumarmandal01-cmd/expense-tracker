@@ -1,0 +1,2 @@
+-- Production reference schema. The Python initializer also creates these tables.
+-- For PostgreSQL, run database/database.py init_db() through the application.
