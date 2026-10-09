@@ -70,7 +70,10 @@ def login_page():
         st.success("Logged in.")
         st.rerun()
     with st.expander("Forgot password?"):
-        st.info("For a production deployment, connect this flow to a verified email reset provider. This starter intentionally does not expose password-reset secrets in the app.")
+    st.write("Reset your password using your registered email.")
+    if st.button("Reset Password", key="open_password_reset"):
+        st.query_params["page"] = "reset"
+        st.rerun()
 
 def logout():
     for key in ["user_id","user_name","user_email","onboarding_done","remember_me"]:
